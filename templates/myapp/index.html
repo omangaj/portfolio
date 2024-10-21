@@ -1,0 +1,399 @@
+
+
+
+{% include "myapp/header.html" %}
+{% block content %}
+{% load static %}
+	  
+   
+	  <section id="home-section" class="hero">
+		  <div class="home-slider  owl-carousel">
+	       <div class="slider-item ">
+	      	<div class="overlay"></div>
+	         <div class="container">
+	          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
+				{% for i in mydata %}
+	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url({{i.background_img.url}});">
+					
+	          	 <div class="overlay"></div>
+	          	</div>
+		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+		          	<div class="text">
+		          		<span class="subheading">Hello!</span>
+						
+			            <h1 class="mb-4 mt-3 ">I'm <span>{{i.name}}</span></h1>
+						
+						
+						<!-- Element to contain animated typing -->
+						<span id="typing-animation"></span>
+
+						<script>
+
+						// Initialize the typing animation
+						const typingAnimationElement = document.getElementById('typing-animation');
+
+						// Create an array of typing text
+	
+						
+						const typingTexts = [
+						'{{i.profetion}}',
+						
+						];
+						
+						// Create a function to display the typing animation for a given text
+						function playTypingAnimation(text) {
+						// Loop through each character and add it to the element
+						for (let i = 0; i < text.length; i++) {
+							setTimeout(() => {
+							typingAnimationElement.textContent += text[i];
+							}, i * 200); // Increase the delay to slow down the typing animation
+						}
+
+						// Once the animation is complete, reset the text and start over
+						setTimeout(() => {
+							typingAnimationElement.textContent = '';
+							playTypingAnimation(typingTexts[(typingTexts.indexOf(text) + 1) % typingTexts.length]);
+						}, text.length * 200);
+						}
+
+						// Start the typing animation loop
+						playTypingAnimation(typingTexts[0]);
+
+						</script>
+						
+
+						<br>
+						<br>
+			            <h2>{{i.high_education}}</h2>
+						{% endfor %}
+						<!-- <h2 class="d-flex" style="margin-bottom: 0">With over 5 years of experience</h2> -->
+						<!-- <br> -->
+			            {% for l in link %}
+							{% if l.name == 'Github' or l.name == 'Linkedin' %}
+								<a href="{{l.link}}" class="btn btn-white btn-outline-white py-3 px-4">{{l.name}}</a>
+							{% endif %}
+						{% endfor %}
+		            </div>
+		          </div>
+	        	</div>
+	        </div>
+	      </div>
+		</div>
+    </section>
+	
+
+
+
+    <section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
+    	<div class="container">
+			<div class="row">
+				<div class="row d-flex align-items-stretch">
+				<!-- <div class="row d-flex"> -->
+					<div class="col-md-6 col-lg-5 d-flex">
+						<div class="img-about img d-flex align-items-stretch">
+							<div class="overlay">
+								<div class="row">
+									<div class="col-sm-6 col-md-5 mt-0">
+									  <div class="about-img ">
+										{% for i in mydata %}
+										<img src="{{i.profile_img.url}}" class="img-fluid rounded b-shadow-a" alt="{{i.photo}}">
+										{% endfor %}
+									  </div>
+									</div>
+									<!-- Details next to profile image -->
+									 {% for i in experience %}
+									<div class="col-sm-6 col-md-7">
+									  <div class="about-info">
+										<p><span class="title-s">Name: </span> <span>{{i.name}}</span></p>
+										<p><span class="title-s">Experience: </span> <span>{{i.experience}}</span></p>
+										<p><span class="title-s">Job Role: </span> <span>{{i.job_role}}</span></p>
+										<p><span class="title-s">Company: </span> <span>{{i.company}}</span></p>
+										<p><span class="title-s">Address: </span> <span>{{i.address}}</span></p>
+									  </div>
+									</div>
+									{% endfor %}
+								  </div>
+
+								  
+								<div class="skill-mf">
+									<p class="title-s">Skills</p>
+									{% for s in skill %}
+									<span>{{s.skill_name}}</span> <span class="pull-right">{{s.skill_percentage}}%</span>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar" style="width: {{s.skill_percentage}}%;" aria-valuenow="{{s.skill_percentage}}" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>	
+									{% endfor %}
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
+						<div class="row justify-content-start pb-3">
+							<div class="col-md-12 heading-section ftco-animate">
+								{% for a in about %}
+								<h1 class="big">About</h1>
+								<h2 class="mb-4">About Me</h2>
+								
+								<p>{{a.about}}</p>
+								<ul class="about-info mt-4 px-md-0 px-2">
+									<li class="d-flex"><span>Profile:</span> <span>{{a.profile}}</span></li>
+									<li class="d-flex"><span>Domain:</span> <span>{{a.domain}}</span></li>
+									<li class="d-flex"><span>Education:</span> <span>{{a.high_education}}</span></li>
+									{% endfor %}
+									
+									<li class="d-flex"><span>Language:</span><span> {% for l in language %}{{l.language}}, {% endfor %}</span></li>
+									
+									<li class="d-flex"><span>Code Editor:</span> <span>{% for e in editor %}{{e.editor}}, {% endfor %}</span></li>
+									<li class="d-flex"><span>Soft Skills:</span> <span>{% for s in soft %}{{s.soft_skill}}, {% endfor %}</span></li>
+									<li class="d-flex"><span>Hobbies:</span> <span>{% for h in hobbie %}{{h.hobbie}}, {% endfor %}</span></li>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<div class="container text-center">
+						<div class="row">
+						  <div class="col align-self-center">
+							<div class="counter-wrap ftco-animate  mt-md-2">
+								<div class="text">
+									<p class="mb-4">
+										<br>
+										{% comment %} <span class="number" data-number="30">0</span> <span>+</span>
+										<span>&nbsp; Projects completed</span> {% endcomment %}
+										<span> Projects completed</span>
+									</p>
+									{% for l in link %}
+										{% if l.name == "Github" %}
+											<p><a href="{{l.link}}" class="btn btn-primary py-3 px-3 ">{{l.name}}</a></p>
+										{% endif %}
+									{% endfor %}
+								</div>
+							</div>
+
+						  </div>
+						</div>
+					  </div>	
+				</div>
+			</div>
+		</div>
+    </section>
+
+
+
+	
+    <section class="ftco-section ftco-no-pb" id="resume-section">
+    	<div class="container">
+    		<div class="row justify-content-center pb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<h1 class="big big-2">Resume</h1>
+            <h2 class="mb-4">Resume</h2>
+			{% for a in about %}
+            <p>{{a.about_resume}}</p>
+			{% endfor %}
+          </div>
+        </div>
+
+		<div class="row">
+			<h1 class="big-4">Experience</h1>
+			<div class="underline"></div>
+		</div>
+		<br>
+		{% for e in experience %}
+		<div class="row">
+			{% if i.experience == "Fresher" or "fresher" %}
+				<div class="col-md-12">
+					<div class="resume-wrap ftco-animate">
+						<h2 class="">{{e.experience}}</h2>
+					</div>
+				</div>
+
+				</div>
+			{% else %}
+				<div class="col-md-6">
+					<div class="resume-wrap ftco-animate">
+						<span class="date">{{e.joining_date}}-{{e.resignation_date}}</span>
+						<h2>{{e.job_role}}</h2>
+						<span class="position">{{e.company}}</span>
+						<p class="mt-4">
+							{{e.Work_experience}}
+						</p>
+					</div>
+
+				</div>
+			</div>
+			{% endif %}
+		{% endfor %}
+
+		<br>
+		<br>
+
+		<div class="row">
+			<h1 class="big-4">Education</h1>
+			<div class="underline"></div>
+		</div>
+		<br>
+		
+			<div class="row">
+				{% for e in education %}
+    			<div class="col-md-6">
+    				<div class="resume-wrap ftco-animate">
+    					<span class="date">{{e.first_year}}-{{e.final_year}}</span>
+    					<h2>{{e.std}}</h2>
+    					<span class="position">{{e.college}}</span>
+    					<p class="mt-4">Grade: {{e.grade}} <br> Percentage: {{e.percentage}} %</p>
+    					 
+    				</div>
+    			</div>
+				{% endfor %}
+
+
+    		
+    	</div>
+		<div class="row justify-content-center mt-5">
+			{% for a in about %}
+			<div class="col-md-12 text-center ftco-animate">
+				<p><a href="{{a.resume.url}}" class="btn btn-primary py-4 px-5">Download CV</a></p>
+			</div>
+			{% endfor %}
+		</div>
+    </section>
+
+   
+
+    {% comment %} <section class="ftco-section" id="project-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h1 class="big big-2">Projects</h1>
+            <h2 class="mb-4">Projects</h2>
+            <p>Below are the sample Data Analytics projects on SQL, Python, Power BI & ML.</p>
+          </div>
+        </div>
+        <div class="row d-flex">
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <a href="https://github.com/rishabhnmishra/SQL_Music_Store_Analysis/blob/main/Music_Store_Query.sql" class="block-20 zoom-effect" style="background-image: url('images/proj_1.jpg');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+
+                <h3 class="heading"><a href="https://github.com/rishabhnmishra/SQL_Music_Store_Analysis/blob/main/Music_Store_Query.sql">Digital Music Store Data Analysis using SQL</a></h3>
+                <p>Analyzed music store data using advanced SQL queires to identify gaps and increase the business growth.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <a href="https://github.com/rishabhnmishra/Python_Diwali_Sales_Analysis/blob/main/Diwali_Sales_Analysis.ipynb" class="block-20 zoom-effect" style="background-image: url('images/proj_2.jpg');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+
+                <h3 class="heading"><a href="https://github.com/rishabhnmishra/Python_Diwali_Sales_Analysis/blob/main/Diwali_Sales_Analysis.ipynb">Data Analysis using Python Project for Beginners</a></h3>
+                <p>Performed exploratory data analysis on diwali sales data using Python to improve the customer experience.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry">
+              <a href="https://github.com/rishabhnmishra/Madhav_Store_Analysis_PowerBI/blob/main/Madhav%20Store%20dashboard.jpg" class="block-20 zoom-effect" style="background-image: url('images/proj_3.jpg');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+
+                <h3 class="heading"><a href="https://github.com/rishabhnmishra/Madhav_Store_Analysis_PowerBI/blob/main/Madhav%20Store%20dashboard.jpg">Power BI Sales dashboard Project for Beginners</a></h3>
+                <p>Designed a power bi dashboard for Madhav Store to track and analyze the online sales data acorss India.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+	<br>
+		<!-- added justify-content-center to center align the last two projects -->
+		<div class="row d-flex justify-content-center">  
+			<div class="col-md-4 d-flex ftco-animate">
+				<div class="blog-entry justify-content-end">
+				<a href="https://github.com/rishabhnmishra/sales_forecasting/tree/main" class="block-20 zoom-effect" style="background-image: url('images/proj_4.jpg');">
+				</a>
+				<div class="text mt-3 float-right d-block">
+  
+				  <h3 class="heading"><a href="https://github.com/rishabhnmishra/sales_forecasting/tree/main">Sales Forecast- Time Series Forecasting</a></h3>
+				  <p>Used multiple machine learning models to forecast sales (retail store) and performed time series analysis.</p>
+				</div>
+			  </div>
+			</div>
+			<div class="col-md-4 d-flex ftco-animate">
+				<div class="blog-entry justify-content-end">
+				<a href="https://github.com/rishabhnmishra/customer_segmentation/blob/main/Customer_Segmentation-final.ipynb" class="block-20 zoom-effect" style="background-image: url('images/proj_5.jpg');">
+				</a>
+				<div class="text mt-3 float-right d-block">
+  
+				  <h3 class="heading"><a href="https://github.com/rishabhnmishra/customer_segmentation/blob/main/Customer_Segmentation-final.ipynb">Customer Segmentation using clustering model</a></h3>
+				  <p>Developed a ML model to give various recommendations of financial products &amp; services on target customer groups.</p>
+				</div>
+			  </div>
+			</div>
+		 </div>
+	  </div>
+    </section> {% endcomment %}
+
+	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
+      <div class="container">
+		<div class="row d-md-flex align-items-center">
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              {% comment %} <div class="text">
+                <strong class="number" data-number="20">0</strong>
+                <span>Achievements</span>
+              </div> {% endcomment %}
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              {% comment %} <div class="text">
+                <strong class="number" data-number="30">0</strong>
+                <span>Projects</span>
+              </div> {% endcomment %}
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              {% comment %} <div class="text">
+                <strong class="number" data-number="1000">0</strong>
+                <span>Mentored Students</span>
+              </div> {% endcomment %}
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              {% comment %} <div class="text">
+                <strong class="number" data-number="500">0</strong>
+                <span>Cups of coffee</span>
+              </div> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+	
+	  <div class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg)">
+			<!-- <div class="container"> -->
+				<div class="row justify-content-center">
+					<div class="col-md-7 ftco-animate text-center">
+						{% for l in link %}
+							{% if l.name == "Github" %}
+								<h2> My projects on {{l.name}} </h2>
+								<div class="heading"> <h4> I love to solve Backend Coding Problems &amp; Backend Logic </h4>
+								<br>
+								<p><a href="{{l.link}}" class="btn btn-primary py-3 px-5">{{l.name}}</a></p>
+								</div>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			<!-- </div> -->
+		</div>
+	</section>
+
+
+{% endblock %}
+    {% include "myapp/footer.html" %}
