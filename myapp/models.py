@@ -124,6 +124,18 @@ class Education(models.Model):
     class Meta:
         verbose_name_plural="10. Education"
     
+class Project(models.Model):
+    pro_image = models.ImageField(upload_to="media/project")
+    pro_link = models.CharField(max_length = 150)
+    pro_name = models.CharField(max_length = 150)
+    pro_info = models.TextField()
+    
+    def __str__ (self):
+        return self.pro_name
+    class Meta:
+        verbose_name_plural="11. Project"
+    
+    
     
     
     
